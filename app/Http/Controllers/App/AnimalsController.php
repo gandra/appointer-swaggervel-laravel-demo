@@ -7,10 +7,21 @@ use App\Http\Controllers\Controller;
 
 class AnimalsController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @SWG\Get(
+     *     path="/api/animals",
+     *     summary="List of available animals",
+     *     @SWG\Response(response="200", description="List of available animals"),
+     *     @SWG\Response(response="default", description="an unexpected error"),
+     *     security={
+     *         {
+     *             "type": "apiKey",
+     *             "in": "header",
+     *             "name": "MY-API-KEY"
+     *         }
+     *     }
+     * )
      */
     public function index()
     {
@@ -28,10 +39,19 @@ class AnimalsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @SWG\Post(
+     *     path="/api/animals",
+     *     summary="Store a new created animal",
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="path",
+     *         description="Animal name.",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(response="200", description="successful creation of animal"),
+     *     @SWG\Response(response=500, description="internal server error")
+     * )
      */
     public function store(Request $request)
     {
